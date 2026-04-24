@@ -1,9 +1,7 @@
 {
-  "version": 2,
   "buildCommand": "npm run build",
   "outputDirectory": "dist/intekn-store",
-  "routes": [
-    { "src": "^/(?!.*\\.).*$", "destination": "/index.html" },
-    { "src": "/(.*)", "destination": "/$1" }
+  "rewrites": [
+    { "source": "/:path*", "destination": "/index.html" }
   ]
 }
