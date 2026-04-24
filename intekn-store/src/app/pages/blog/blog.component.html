@@ -1,0 +1,33 @@
+<section class="page-hero">
+  <div class="container">
+    <h1>Blog & News</h1>
+    <p>Insights, tips, and updates from InteKN Store</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div *ngIf="loading" class="loading-grid">
+      <div class="skeleton-card" *ngFor="let i of [1,2,3,4]"></div>
+    </div>
+    <div class="blog-grid" *ngIf="!loading">
+      <article class="blog-card" *ngFor="let post of posts">
+        <div class="blog-img">
+          <img *ngIf="post.image_url" [src]="post.image_url" [alt]="post.title" loading="lazy">
+          <div *ngIf="!post.image_url" class="blog-img-placeholder">📰</div>
+        </div>
+        <div class="blog-content">
+          <div class="blog-tags">
+            <span class="tag" *ngFor="let tag of post.tags">{{ tag }}</span>
+          </div>
+          <h3>{{ post.title }}</h3>
+          <p>{{ post.excerpt }}</p>
+          <div class="blog-footer">
+            <span class="author">✍️ {{ post.author }}</span>
+            <span class="date">{{ post.published_at | date:'mediumDate' }}</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>

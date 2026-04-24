@@ -1,0 +1,49 @@
+<div class="auth-layout">
+  <div class="auth-visual">
+    <div class="auth-branding">
+      <div class="auth-logo"><i class="fa-solid fa-utensils"></i> InteKN</div>
+      <p>Welcome back! Sign in to access your orders, manage your profile, and continue shopping.</p>
+      <div class="auth-features">
+        <div class="auth-feat"><i class="fa-solid fa-truck-fast"></i><span>Fast Nationwide Delivery</span></div>
+        <div class="auth-feat"><i class="fa-solid fa-shield-halved"></i><span>Secure Transactions</span></div>
+        <div class="auth-feat"><i class="fa-solid fa-wallet"></i><span>GCash & Maya Accepted</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="auth-form-area">
+    <div class="auth-card">
+      <h1>Welcome Back</h1>
+      <p class="auth-subtitle">Don't have an account? <a routerLink="/signup">Sign up free</a></p>
+
+      <div *ngIf="error" class="alert alert-error">{{ error }}</div>
+
+      <form [formGroup]="form" (ngSubmit)="submit()">
+        <div class="form-group">
+          <label><i class="fa-solid fa-envelope"></i> Email Address</label>
+          <input type="email" formControlName="email" placeholder="your&#64;email.com"
+                 [class.invalid]="form.get('email')?.invalid && form.get('email')?.touched">
+        </div>
+        <div class="form-group">
+          <label>
+            <i class="fa-solid fa-lock"></i> Password
+            <a href="#" class="forgot-link">Forgot password?</a>
+          </label>
+          <div class="password-input">
+            <input [type]="showPassword ? 'text' : 'password'" formControlName="password" placeholder="Your password">
+            <button type="button" class="toggle-pw" (click)="showPassword = !showPassword">
+              <i [class]="showPassword ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye'"></i>
+            </button>
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary btn-full btn-lg" [disabled]="loading || form.invalid">
+          <span class="btn-anim"></span>
+          <span>{{ loading ? 'Signing In...' : 'Sign In' }}</span>
+        </button>
+      </form>
+
+      <div class="divider"><span>or</span></div>
+      <p class="signup-cta">New customer? <a routerLink="/signup">Create a free account</a></p>
+    </div>
+  </div>
+</div>

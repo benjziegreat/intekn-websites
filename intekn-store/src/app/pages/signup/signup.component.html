@@ -1,0 +1,83 @@
+<div class="auth-layout">
+  <div class="auth-visual">
+    <div class="auth-branding">
+      <div class="auth-logo"><i class="fa-solid fa-utensils"></i> InteKN</div>
+      <p>Join thousands of happy shoppers. Sign up for exclusive deals, fast delivery, and secure payments.</p>
+      <ul class="auth-benefits">
+        <li><i class="fa-solid fa-check"></i> Free shipping on orders over ₱1,000</li>
+        <li><i class="fa-solid fa-check"></i> GCash, Maya & bank payment support</li>
+        <li><i class="fa-solid fa-check"></i> 30-day easy returns</li>
+        <li><i class="fa-solid fa-check"></i> 24/7 customer support</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="auth-form-area">
+    <div class="auth-card">
+      <h1>Create Account</h1>
+      <p class="auth-subtitle">Already have an account? <a routerLink="/login">Sign in</a></p>
+
+      <div *ngIf="confirmationSent" class="confirmation-sent">
+        <div class="confirm-icon"><i class="fa-solid fa-envelope-circle-check"></i></div>
+        <h2>Check your email!</h2>
+        <p>We sent a confirmation link to <strong>{{ signupEmail }}</strong>.</p>
+        <p>Click the link in the email to activate your account, then <a routerLink="/login">sign in here</a>.</p>
+        <p class="tip"><i class="fa-solid fa-lightbulb"></i> Check your <strong>spam/junk folder</strong> if you don't see it within a minute.</p>
+
+        <div class="resend-area">
+          <div *ngIf="resendSuccess" class="alert alert-success" style="margin-bottom:0.75rem"><i class="fa-solid fa-circle-check"></i> Confirmation email resent!</div>
+          <button class="btn btn-outline" (click)="resendEmail()" [disabled]="resendLoading">
+            <span class="btn-anim"></span>
+            <span>{{ resendLoading ? 'Sending...' : 'Resend confirmation email' }}</span>
+          </button>
+        </div>
+
+        <a routerLink="/login" class="btn btn-primary" style="margin-top:1rem;display:inline-block">
+          <span class="btn-anim"></span><span>Go to Login</span>
+        </a>
+      </div>
+
+      <div *ngIf="error" class="alert alert-error">{{ error }}</div>
+
+      <form [formGroup]="form" (ngSubmit)="submit()" *ngIf="!confirmationSent">
+        <div class="form-group">
+          <label><i class="fa-solid fa-user"></i> Full Name *</label>
+          <input type="text" formControlName="fullName" placeholder="Juan dela Cruz"
+                 [class.invalid]="form.get('fullName')?.invalid && form.get('fullName')?.touched">
+          <span class="field-error" *ngIf="form.get('fullName')?.invalid && form.get('fullName')?.touched">
+            Minimum 3 characters required
+          </span>
+        </div>
+        <div class="form-group">
+          <label><i class="fa-solid fa-envelope"></i> Email Address *</label>
+          <input type="email" formControlName="email" placeholder="juan&#64;email.com"
+                 [class.invalid]="form.get('email')?.invalid && form.get('email')?.touched">
+          <span class="field-error" *ngIf="form.get('email')?.invalid && form.get('email')?.touched">
+            Valid email required
+          </span>
+        </div>
+        <div class="form-group">
+          <label><i class="fa-solid fa-lock"></i> Password *</label>
+          <div class="password-input">
+            <input [type]="showPassword ? 'text' : 'password'" formControlName="password" placeholder="Min. 8 characters"
+                   [class.invalid]="form.get('password')?.invalid && form.get('password')?.touched">
+            <button type="button" class="toggle-pw" (click)="showPassword = !showPassword">
+              <i [class]="showPassword ? 'fa-solid fa-eye-slash' : 'fa-solid fa-eye'"></i>
+            </button>
+          </div>
+          <span class="field-error" *ngIf="form.get('password')?.invalid && form.get('password')?.touched">
+            Minimum 8 characters required
+          </span>
+        </div>
+        <div class="form-check">
+          <input type="checkbox" id="agreeTerms" formControlName="agreeTerms">
+          <label for="agreeTerms">I agree to the <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a></label>
+        </div>
+        <button type="submit" class="btn btn-primary btn-full btn-lg" [disabled]="loading || form.invalid">
+          <span class="btn-anim"></span>
+          <span>{{ loading ? 'Creating Account...' : 'Create Account' }}</span>
+        </button>
+      </form>
+    </div>
+  </div>
+</div>

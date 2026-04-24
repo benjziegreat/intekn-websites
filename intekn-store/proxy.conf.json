@@ -1,0 +1,18 @@
+{
+  "/api/create-payment-link": {
+    "target": "https://zhuthwapkyskuikkbztf.supabase.co/functions/v1",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/api/create-payment-link": "/create-payment-link"
+    }
+  },
+  "/api/verify-payment": {
+    "target": "https://zhuthwapkyskuikkbztf.supabase.co/functions/v1",
+    "secure": true,
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/api/verify-payment": "/verify-payment"
+    }
+  }
+}

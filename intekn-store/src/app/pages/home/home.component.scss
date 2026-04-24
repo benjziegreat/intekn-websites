@@ -1,0 +1,183 @@
+/* ======================== Hero Banner ======================== */
+.hero-banner {
+  position: relative;
+  min-height: 100vh;
+  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+    url('https://images.unsplash.com/photo-1518770660439-4636190af475?w=1600') center/cover no-repeat;
+  background-attachment: fixed;
+  display: flex;
+  align-items: center;
+  padding: 8rem 1.5rem 4rem;
+}
+
+.hero-content {
+  color: #fff;
+  max-width: 700px;
+
+  .hero-sub {
+    font-family: 'Pacifico', cursive;
+    color: var(--primary);
+    font-size: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  h1 {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    line-height: 1.15;
+    color: #fff;
+    margin-bottom: 1.5rem;
+
+    span { color: var(--primary); }
+  }
+
+  .hero-desc {
+    font-family: 'Heebo', sans-serif;
+    font-size: 1.1rem;
+    opacity: 0.9;
+    margin-bottom: 2rem;
+    max-width: 520px;
+    line-height: 1.7;
+  }
+}
+
+.hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; }
+
+/* ======================== Services Cards ======================== */
+.services-section { background: #fff; padding: 3rem 0; }
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 1.5rem;
+}
+
+.service-card {
+  position: relative;
+  background: var(--bg);
+  border-radius: 12px;
+  padding: 2rem 1.5rem;
+  overflow: hidden;
+  cursor: default;
+  transition: transform 0.2s;
+  box-shadow: 0 0 45px rgba(0,0,0,0.05);
+
+  .scard-anim {
+    position: absolute;
+    top: 0; right: 0;
+    width: 0; height: 100%;
+    background: var(--primary);
+    transition: width 0.3s ease, right 0.3s ease;
+    z-index: 1;
+  }
+
+  .scard-icon, .scard-body { position: relative; z-index: 2; }
+
+  .scard-icon {
+    margin-bottom: 1rem;
+    i { font-size: 2rem; color: var(--primary); transition: color 0.3s; }
+  }
+
+  .scard-body {
+    h5 {
+      font-family: 'Pacifico', cursive;
+      font-weight: 400;
+      font-size: 1.05rem;
+      color: var(--dark);
+      margin-bottom: 0.5rem;
+      transition: color 0.3s;
+    }
+    p { font-family: 'Heebo', sans-serif; font-size: 0.9rem; color: var(--text-light); transition: color 0.3s; }
+  }
+
+  &:hover .scard-anim { width: 100%; left: 0; right: auto; }
+  &:hover .scard-icon i,
+  &:hover .scard-body h5,
+  &:hover .scard-body p { color: #fff; }
+}
+
+/* ======================== About Section ======================== */
+.about-section {
+  padding: 5rem 0;
+  background: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)),
+    url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1600') center/cover no-repeat;
+  background-attachment: fixed;
+}
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: center;
+
+  @media (max-width: 768px) { grid-template-columns: 1fr; gap: 2rem; }
+}
+
+.about-images {
+  .about-img-main img {
+    width: 100%; border-radius: 8px; margin-bottom: 0.75rem;
+    height: 260px; object-fit: cover;
+  }
+  .about-img-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.75rem;
+    img { width: 100%; height: 130px; object-fit: cover; border-radius: 8px; }
+  }
+}
+
+.about-content {
+  color: #fff;
+  h2 { color: #fff; margin-bottom: 1.25rem; }
+  p { font-family: 'Heebo', sans-serif; opacity: 0.9; margin-bottom: 1rem; line-height: 1.8; }
+
+  .section-subtitle { color: var(--primary); }
+}
+
+.about-stats {
+  display: flex; align-items: center; gap: 1.5rem; margin: 1.5rem 0 2rem;
+}
+.about-stat {
+  display: flex; flex-direction: column;
+  .stat-num {
+    font-family: 'Pacifico', cursive;
+    font-size: 2.5rem;
+    color: var(--primary);
+    line-height: 1;
+  }
+  .stat-label { font-size: 0.85rem; color: rgba(255,255,255,0.8); }
+}
+.about-divider { width: 1px; height: 60px; background: rgba(255,255,255,0.3); }
+
+/* ======================== Products Grid ======================== */
+.featured-section .products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.view-all-wrap { text-align: center; margin-top: 2.5rem; }
+
+/* ======================== Payment Methods ======================== */
+.payment-methods {
+  display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;
+}
+
+.payment-method {
+  display: flex; flex-direction: column; align-items: center; gap: 0.5rem;
+  padding: 1.5rem 2rem;
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  font-weight: 700;
+  font-family: 'Nunito', sans-serif;
+  font-size: 0.95rem;
+  min-width: 110px;
+  transition: all 0.2s;
+  i { font-size: 1.5rem; color: var(--primary); }
+  &:hover { border-color: var(--primary); transform: translateY(-3px); box-shadow: 0 8px 24px rgba(229,97,47,0.15); }
+}
+
+@media (max-width: 576px) {
+  .hero-btns { flex-direction: column; }
+  .about-grid { grid-template-columns: 1fr; }
+}
+

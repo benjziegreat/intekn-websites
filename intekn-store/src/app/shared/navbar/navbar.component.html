@@ -1,0 +1,57 @@
+<header class="site-header" [class.scrolled]="isScrolled">
+  <div class="header-inner container">
+    <!-- Logo -->
+    <a routerLink="/" class="logo">
+      <i class="fa-solid fa-utensils"></i>
+      <span>InteKN</span>
+    </a>
+
+    <!-- Desktop Nav -->
+    <nav class="desktop-nav">
+      <ul>
+        <li><a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Home</a></li>
+        <li><a routerLink="/products" routerLinkActive="active">Shop</a></li>
+        <li><a routerLink="/services" routerLinkActive="active">Services</a></li>
+        <li><a routerLink="/about" routerLinkActive="active">About</a></li>
+        <li><a routerLink="/blog" routerLinkActive="active">Blog</a></li>
+        <li><a routerLink="/contact" routerLinkActive="active">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- Actions -->
+    <div class="header-actions">
+      <a routerLink="/cart" class="cart-icon" title="Cart">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <span class="cart-badge" *ngIf="cartCount > 0">{{ cartCount }}</span>
+      </a>
+      <ng-container *ngIf="isLoggedIn; else guestLinks">
+        <a routerLink="/dashboard" class="nav-btn"><span>{{ userName || 'Account' }}</span></a>
+        <button class="nav-btn outline" (click)="signOut()"><span>Logout</span></button>
+      </ng-container>
+      <ng-template #guestLinks>
+        <a routerLink="/login" class="nav-btn outline"><span>Login</span></a>
+        <a routerLink="/signup" class="nav-btn"><span>Sign Up</span></a>
+      </ng-template>
+
+      <!-- Hamburger -->
+      <button class="hamburger" (click)="toggleMenu()" [class.open]="isMenuOpen" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" [class.open]="isMenuOpen">
+    <ul>
+      <li><a routerLink="/" (click)="isMenuOpen=false">Home</a></li>
+      <li><a routerLink="/products" (click)="isMenuOpen=false">Shop</a></li>
+      <li><a routerLink="/services" (click)="isMenuOpen=false">Services</a></li>
+      <li><a routerLink="/about" (click)="isMenuOpen=false">About</a></li>
+      <li><a routerLink="/blog" (click)="isMenuOpen=false">Blog</a></li>
+      <li><a routerLink="/contact" (click)="isMenuOpen=false">Contact</a></li>
+      <li *ngIf="isLoggedIn"><a routerLink="/dashboard" (click)="isMenuOpen=false">Dashboard</a></li>
+      <li *ngIf="!isLoggedIn"><a routerLink="/login" (click)="isMenuOpen=false">Login</a></li>
+      <li *ngIf="!isLoggedIn"><a routerLink="/signup" (click)="isMenuOpen=false">Sign Up</a></li>
+    </ul>
+  </div>
+</header>

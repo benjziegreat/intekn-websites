@@ -1,0 +1,132 @@
+<!-- Hero Section (Restoran style) -->
+<section class="hero-banner">
+  <div class="hero-overlay"></div>
+  <div class="container hero-content">
+    <p class="hero-sub">We Are Open Monday – Saturday</p>
+    <h1>Enjoy Our<br><span>Quality Products</span></h1>
+    <p class="hero-desc">Discover our curated selection of premium products with fast delivery and secure Philippine payments via GCash, Maya, and bank transfer.</p>
+    <div class="hero-btns">
+      <a routerLink="/products" class="btn btn-primary"><span class="btn-anim"></span><span>Shop Now</span></a>
+      <a routerLink="/about" class="btn btn-outline-white"><span class="btn-anim"></span><span>Learn More</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- Services Cards (Restoran style) -->
+<section class="services-section section">
+  <div class="container">
+    <div class="services-grid">
+      <div class="service-card" *ngFor="let f of features">
+        <div class="scard-anim"></div>
+        <div class="scard-icon"><i [class]="f.faIcon"></i></div>
+        <div class="scard-body">
+          <h5>{{ f.title }}</h5>
+          <p>{{ f.desc }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- About Section -->
+<section class="about-section">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-images">
+        <div class="about-img-main">
+          <img src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600" alt="About InteKN">
+        </div>
+        <div class="about-img-grid">
+          <img src="https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=300" alt="Store">
+          <img src="https://images.unsplash.com/photo-1472851294608-062f824d29cc?w=300" alt="Products">
+          <img src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=300" alt="Service">
+        </div>
+      </div>
+      <div class="about-content">
+        <div class="section-subtitle">About Us</div>
+        <h2>Welcome to InteKN Store</h2>
+        <p>We are passionate about delivering quality products to our customers in the Philippines. Our commitment to excellence means every product is carefully selected and every order is handled with care.</p>
+        <p>From electronics to lifestyle goods, we bring you the best at competitive prices with convenient payment options you already use.</p>
+        <div class="about-stats">
+          <div class="about-stat">
+            <span class="stat-num">15+</span>
+            <span class="stat-label">Years of Experience</span>
+          </div>
+          <div class="about-divider"></div>
+          <div class="about-stat">
+            <span class="stat-num">50K+</span>
+            <span class="stat-label">Happy Customers</span>
+          </div>
+        </div>
+        <a routerLink="/about" class="btn btn-primary"><span class="btn-anim"></span><span>Read More</span></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Featured Products -->
+<section class="featured-section section bg-light">
+  <div class="container">
+    <div class="section-title">
+      <div class="section-subtitle">Our Products</div>
+      <h2>Tasty And Good Price</h2>
+    </div>
+    <div *ngIf="loading" class="loading-grid">
+      <div class="skeleton-card" *ngFor="let i of [1,2,3,4,5,6]"></div>
+    </div>
+    <div class="products-grid" *ngIf="!loading">
+      <div class="product-card" *ngFor="let product of featuredProducts">
+        <div class="product-img">
+          <img [src]="product.image_url || 'assets/placeholder.png'" [alt]="product.name" loading="lazy">
+          <span class="product-badge" *ngIf="product.featured">Featured</span>
+        </div>
+        <div class="product-info">
+          <span class="product-category">{{ product.category }}</span>
+          <h4>{{ product.name }}</h4>
+          <p>{{ product.description | slice:0:80 }}...</p>
+          <div class="product-footer">
+            <span class="price">₱{{ product.price | number:'1.2-2' }}</span>
+            <a [routerLink]="['/products', product.id]" class="btn btn-primary btn-sm"><span class="btn-anim"></span><span>Order</span></a>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div *ngIf="!loading && featuredProducts.length === 0" class="empty-state">
+      <p>No featured products yet. Check back soon!</p>
+    </div>
+    <div class="view-all-wrap" *ngIf="!loading && featuredProducts.length > 0">
+      <a routerLink="/products" class="btn btn-dark"><span class="btn-anim"></span><span>View All Products</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Banner -->
+<section class="cta-section">
+  <div class="cta-content container">
+    <div class="section-subtitle" style="justify-content:center">Make A Reservation</div>
+    <h2>Ready to Start Shopping?</h2>
+    <p>Join thousands of happy customers. Sign up today and get exclusive deals on your first order!</p>
+    <div class="cta-actions">
+      <a routerLink="/signup" class="btn btn-white"><span class="btn-anim"></span><span>Create Account</span></a>
+      <a routerLink="/products" class="btn btn-outline-white"><span class="btn-anim"></span><span>Browse Products</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- Payment Methods -->
+<section class="payment-section section">
+  <div class="container">
+    <div class="section-title">
+      <div class="section-subtitle">We Accept</div>
+      <h2>Accepted Payment Methods</h2>
+    </div>
+    <div class="payment-methods">
+      <div class="payment-method"><i class="fa-solid fa-wallet"></i><span>GCash</span></div>
+      <div class="payment-method"><i class="fa-solid fa-mobile-screen"></i><span>Maya</span></div>
+      <div class="payment-method"><i class="fa-solid fa-building-columns"></i><span>BPI Online</span></div>
+      <div class="payment-method"><i class="fa-solid fa-landmark"></i><span>BDO</span></div>
+      <div class="payment-method"><i class="fa-solid fa-university"></i><span>UnionBank</span></div>
+      <div class="payment-method"><i class="fa-regular fa-credit-card"></i><span>Debit Card</span></div>
+    </div>
+  </div>
+</section>

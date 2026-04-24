@@ -1,0 +1,80 @@
+<!-- Page Hero -->
+<section class="page-hero" style="background-image: url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1600')">
+  <div class="container">
+    <h1>About InteKN Store</h1>
+    <p>We're passionate about connecting people with quality products through a seamless shopping experience.</p>
+  </div>
+</section>
+
+<!-- Our Story -->
+<section class="section">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-text">
+        <div class="section-subtitle">Our Story</div>
+        <h2>Delivering Quality Since 2020</h2>
+        <p>InteKN Store was born out of a simple belief: everyone deserves access to quality products at fair prices. Founded in 2020, we started as a small online shop and have grown into one of the Philippines' trusted e-commerce platforms.</p>
+        <p>We prioritize customer satisfaction, secure transactions, and fast delivery. Our integration with GCash, Maya, and major banks ensures you can pay the way you prefer.</p>
+        <div class="values">
+          <div class="value-item"><i class="fa-solid fa-bullseye"></i> Customer First</div>
+          <div class="value-item"><i class="fa-solid fa-shield-halved"></i> Security</div>
+          <div class="value-item"><i class="fa-solid fa-bolt"></i> Speed</div>
+          <div class="value-item"><i class="fa-solid fa-leaf"></i> Sustainability</div>
+        </div>
+        <a routerLink="/contact" class="btn btn-primary" style="margin-top:1.5rem"><span class="btn-anim"></span><span>Get In Touch</span></a>
+      </div>
+      <div class="stats-panel">
+        <div class="stat-box">
+          <span class="stat-num">50K+</span>
+          <span class="stat-label">Happy Customers</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-num">10K+</span>
+          <span class="stat-label">Products</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-num">4.9</span>
+          <span class="stat-label">Average Rating</span>
+        </div>
+        <div class="stat-box">
+          <span class="stat-num">24/7</span>
+          <span class="stat-label">Support</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Timeline -->
+<section class="timeline-section section bg-light">
+  <div class="container">
+    <div class="section-title">
+      <div class="section-subtitle">Our Journey</div>
+      <h2>How We Got Here</h2>
+    </div>
+    <div class="timeline">
+      <div class="timeline-item" *ngFor="let m of milestones">
+        <div class="timeline-year">{{ m.year }}</div>
+        <div class="timeline-dot"></div>
+        <div class="timeline-content">{{ m.text }}</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Team -->
+<section class="team-section section">
+  <div class="container">
+    <div class="section-title">
+      <div class="section-subtitle">Our Team</div>
+      <h2>Meet The People Behind InteKN</h2>
+    </div>
+    <div class="team-grid">
+      <div class="team-card" *ngFor="let member of team">
+        <div class="team-avatar"><i class="fa-solid fa-user-tie"></i></div>
+        <h4>{{ member.name }}</h4>
+        <span>{{ member.role }}</span>
+      </div>
+    </div>
+  </div>
+</section>

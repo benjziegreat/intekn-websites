@@ -1,0 +1,54 @@
+<div class="container section">
+  <div *ngIf="loading" class="loading-state">Loading product...</div>
+
+  <div *ngIf="!loading && !product" class="empty-state">
+    <h2>Product not found</h2>
+    <a routerLink="/products" class="btn btn-primary">Back to Shop</a>
+  </div>
+
+  <div *ngIf="product" class="product-detail">
+    <a routerLink="/products" class="back-link">← Back to Products</a>
+    <div class="detail-grid">
+      <div class="detail-image">
+        <img [src]="product.image_url || 'assets/placeholder.png'" [alt]="product.name">
+        <span class="stock-badge" [class.out]="product.stock_qty === 0">
+          {{ product.stock_qty > 0 ? product.stock_qty + ' in stock' : 'Out of stock' }}
+        </span>
+      </div>
+      <div class="detail-info">
+        <span class="category-tag">{{ product.category }}</span>
+        <h1>{{ product.name }}</h1>
+        <div class="price-display">₱{{ product.price | number:'1.2-2' }}</div>
+        <p class="description">{{ product.description }}</p>
+
+        <div class="quantity-section">
+          <label>Quantity</label>
+          <div class="qty-control">
+            <button (click)="quantity = quantity > 1 ? quantity - 1 : 1">−</button>
+            <span>{{ quantity }}</span>
+            <button (click)="quantity = quantity < product.stock_qty ? quantity + 1 : quantity">+</button>
+          </div>
+        </div>
+
+        <div class="action-buttons">
+          <button class="btn btn-outline btn-lg" (click)="addToCart()" [disabled]="product.stock_qty === 0">
+            {{ addedToCart ? '✓ Added!' : '🛒 Add to Cart' }}
+          </button>
+          <button class="btn btn-primary btn-lg" (click)="buyNow()" [disabled]="product.stock_qty === 0">
+            ⚡ Buy Now
+          </button>
+        </div>
+
+        <div class="product-meta">
+          <div class="meta-item"><span>Category:</span> {{ product.category }}</div>
+          <div class="meta-item"><span>SKU:</span> {{ product.id | slice:0:8 | uppercase }}</div>
+          <div class="meta-item"><span>Availability:</span>
+            <strong [style.color]="product.stock_qty > 0 ? '#22c55e' : '#ef4444'">
+              {{ product.stock_qty > 0 ? 'In Stock' : 'Out of Stock' }}
+            </strong>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,41 @@
+<!-- Page Hero -->
+<section class="page-hero" style="background-image: url('https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=1600')">
+  <div class="container">
+    <h1>Our Services</h1>
+    <p>Everything you need for a seamless shopping experience</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-title">
+      <div class="section-subtitle">What We Offer</div>
+      <h2>Services Built For You</h2>
+    </div>
+    <div class="services-grid">
+      <div class="service-card" *ngFor="let service of services">
+        <div class="scard-anim"></div>
+        <div class="scard-icon"><i [class]="service.faIcon + ' fa-2x'"></i></div>
+        <div class="scard-body">
+          <h3>{{ service.title }}</h3>
+          <p>{{ service.desc }}</p>
+          <ul class="service-features">
+            <li *ngFor="let f of service.features"><i class="fa-solid fa-check"></i> {{ f }}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-section">
+  <div class="cta-content container">
+    <div class="section-subtitle" style="justify-content:center">Get Started</div>
+    <h2>Start Shopping Today</h2>
+    <p>Experience all these services and more when you shop at InteKN Store</p>
+    <div class="cta-actions">
+      <a routerLink="/products" class="btn btn-white"><span class="btn-anim"></span><span>Shop Now</span></a>
+      <a routerLink="/signup" class="btn btn-outline-white"><span class="btn-anim"></span><span>Create Account</span></a>
+    </div>
+  </div>
+</section>

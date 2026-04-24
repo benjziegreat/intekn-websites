@@ -1,0 +1,39 @@
+.shop-layout { display: grid; grid-template-columns: 220px 1fr; gap: 2rem; }
+.sidebar {
+  h3 { font-size: 1rem; margin-bottom: 1rem; font-weight: 700; }
+  .category-list {
+    list-style: none; padding: 0; margin: 0;
+    li {
+      padding: 0.6rem 0.75rem;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.9rem;
+      color: #555;
+      transition: all 0.2s;
+      &:hover, &.active { background: var(--primary); color: #fff; }
+    }
+  }
+}
+.toolbar {
+  display: flex; gap: 1rem; margin-bottom: 1rem;
+  .search-input {
+    flex: 1; padding: 0.6rem 1rem; border: 1px solid #ddd; border-radius: 8px;
+    font-size: 0.9rem; outline: none;
+    &:focus { border-color: var(--primary); }
+  }
+  .sort-select {
+    padding: 0.6rem 1rem; border: 1px solid #ddd; border-radius: 8px;
+    font-size: 0.9rem; outline: none; cursor: pointer;
+  }
+}
+.results-count { color: #888; font-size: 0.875rem; margin-bottom: 1rem; }
+.product-actions { display: flex; gap: 0.5rem; }
+@media (max-width: 768px) {
+  .shop-layout { grid-template-columns: 1fr; }
+  .sidebar { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem;
+    h3 { width: 100%; }
+    .category-list { display: flex; flex-wrap: wrap; gap: 0.5rem;
+      li { white-space: nowrap; }
+    }
+  }
+}

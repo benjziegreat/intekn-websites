@@ -1,0 +1,108 @@
+<div class="dashboard-layout section">
+  <div class="container">
+    <div class="dashboard-grid">
+      <!-- Sidebar -->
+      <aside class="dash-sidebar">
+        <div class="user-avatar">
+          <span class="avatar-placeholder">{{ profile?.full_name?.charAt(0) || '?' }}</span>
+          <div>
+            <strong>{{ profile?.full_name }}</strong>
+            <span>{{ profile?.email }}</span>
+          </div>
+        </div>
+        <nav class="dash-nav">
+          <button [class.active]="activeTab==='overview'" (click)="activeTab='overview'">📊 Overview</button>
+          <button [class.active]="activeTab==='profile'" (click)="activeTab='profile'">👤 Edit Profile</button>
+          <button [class.active]="activeTab==='orders'" (click)="activeTab='orders'">📦 My Orders</button>
+          <a routerLink="/order-history" class="dash-link">🕐 Order History</a>
+          <a routerLink="/products" class="dash-link">🛍️ Shop Now</a>
+        </nav>
+      </aside>
+
+      <!-- Content -->
+      <main class="dash-content">
+        <!-- Overview Tab -->
+        <div *ngIf="activeTab === 'overview'">
+          <h2>Welcome back, {{ (profile?.full_name || '').split(' ')[0] }}! 👋</h2>
+          <div class="overview-cards">
+            <div class="stat-card"><span class="stat-icon">📦</span><strong>{{ recentOrders.length }}</strong><span>Total Orders</span></div>
+            <div class="stat-card"><span class="stat-icon">⭐</span><strong>4.9</strong><span>Rating</span></div>
+            <div class="stat-card"><span class="stat-icon">💰</span><strong>₱{{ totalSpent | number:'1.2-2' }}</strong><span>Total Spent</span></div>
+          </div>
+          <h3>Recent Orders</h3>
+          <div class="orders-table" *ngIf="recentOrders.length > 0">
+            <table>
+              <thead><tr><th>Order ID</th><th>Total</th><th>Status</th><th>Date</th></tr></thead>
+              <tbody>
+                <tr *ngFor="let order of recentOrders">
+                  <td>{{ order.id | slice:0:8 | uppercase }}</td>
+                  <td>₱{{ order.total | number:'1.2-2' }}</td>
+                  <td><span class="status-badge" [class]="order.status">{{ order.status }}</span></td>
+                  <td>{{ order.created_at | date:'shortDate' }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p *ngIf="recentOrders.length === 0" class="empty-msg">No orders yet. <a routerLink="/products">Start shopping!</a></p>
+        </div>
+
+        <!-- Profile Tab -->
+        <div *ngIf="activeTab === 'profile'">
+          <h2>Edit Profile</h2>
+          <div *ngIf="saveSuccess" class="alert alert-success">✅ Profile updated successfully!</div>
+          <form [formGroup]="editForm" (ngSubmit)="saveProfile()" class="profile-form">
+            <div class="form-row">
+              <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" formControlName="full_name" placeholder="Juan dela Cruz">
+              </div>
+              <div class="form-group">
+                <label>Phone Number</label>
+                <input type="tel" formControlName="phone" placeholder="+63 917 xxx xxxx">
+              </div>
+            </div>
+            <div class="form-group">
+              <label>Shipping Address</label>
+              <input type="text" formControlName="address" placeholder="Street, Barangay">
+            </div>
+            <div class="form-row">
+              <div class="form-group">
+                <label>City</label>
+                <input type="text" formControlName="city" placeholder="Manila">
+              </div>
+              <div class="form-group">
+                <label>Country</label>
+                <input type="text" formControlName="country" placeholder="Philippines">
+              </div>
+            </div>
+            <button type="submit" class="btn btn-primary" [disabled]="saving">
+              {{ saving ? 'Saving...' : 'Save Changes' }}
+            </button>
+          </form>
+        </div>
+
+        <!-- Orders Tab -->
+        <div *ngIf="activeTab === 'orders'">
+          <h2>My Orders</h2>
+          <div class="orders-table" *ngIf="recentOrders.length > 0">
+            <table>
+              <thead><tr><th>Order ID</th><th>Items</th><th>Total</th><th>Payment</th><th>Status</th><th>Date</th></tr></thead>
+              <tbody>
+                <tr *ngFor="let order of recentOrders">
+                  <td>{{ order.id | slice:0:8 | uppercase }}</td>
+                  <td>{{ order.items.length }} item(s)</td>
+                  <td>₱{{ order.total | number:'1.2-2' }}</td>
+                  <td>{{ order.payment_method }}</td>
+                  <td><span class="status-badge" [class]="order.status">{{ order.status }}</span></td>
+                  <td>{{ order.created_at | date:'shortDate' }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+          <p *ngIf="recentOrders.length === 0" class="empty-msg">No orders yet.</p>
+          <a routerLink="/order-history" class="btn btn-outline" style="margin-top:1rem">View Full History</a>
+        </div>
+      </main>
+    </div>
+  </div>
+</div>

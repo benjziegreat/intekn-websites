@@ -1,0 +1,65 @@
+<section class="page-hero">
+  <div class="container">
+    <h1>Order History</h1>
+    <p>Track and manage all your past orders</p>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div *ngIf="loading" class="loading-state">Loading orders...</div>
+
+    <div *ngIf="!loading && orders.length === 0" class="empty-state">
+      <span class="empty-icon">📦</span>
+      <h2>No orders yet</h2>
+      <p>Start shopping to see your order history here.</p>
+      <a routerLink="/products" class="btn btn-primary">Shop Now</a>
+    </div>
+
+    <div class="orders-list" *ngIf="!loading && orders.length > 0">
+      <div class="order-card" *ngFor="let order of orders">
+        <div class="order-header" (click)="toggleExpand(order.id!)">
+          <div class="order-id">
+            <strong>#{{ order.id | slice:0:8 | uppercase }}</strong>
+            <span class="status-badge" [class]="order.status">{{ order.status }}</span>
+          </div>
+          <div class="order-meta">
+            <span>{{ order.items.length }} item(s)</span>
+            <span>{{ order.payment_method }}</span>
+            <span>{{ order.created_at | date:'mediumDate' }}</span>
+            <strong class="order-total">₱{{ order.total | number:'1.2-2' }}</strong>
+          </div>
+          <span class="expand-icon">{{ expandedId === order.id ? '▲' : '▼' }}</span>
+        </div>
+
+        <div class="order-details" *ngIf="expandedId === order.id">
+          <div class="detail-section">
+            <h4>Items</h4>
+            <div class="item-row" *ngFor="let item of order.items">
+              <span>{{ item.product_name }}</span>
+              <span>x{{ item.quantity }} &#64; ₱{{ item.unit_price | number:'1.2-2' }}</span>
+              <span>₱{{ item.subtotal | number:'1.2-2' }}</span>
+            </div>
+          </div>
+          <div class="detail-grid">
+            <div>
+              <h4>Shipping Address</h4>
+              <p>{{ order.shipping_address }}</p>
+            </div>
+            <div>
+              <h4>Payment Info</h4>
+              <p>Method: {{ order.payment_method }}</p>
+              <p *ngIf="order.payment_ref">Ref: {{ order.payment_ref }}</p>
+            </div>
+            <div>
+              <h4>Order Summary</h4>
+              <p>Subtotal: ₱{{ order.subtotal | number:'1.2-2' }}</p>
+              <p>Tax: ₱{{ order.tax | number:'1.2-2' }}</p>
+              <p><strong>Total: ₱{{ order.total | number:'1.2-2' }}</strong></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
